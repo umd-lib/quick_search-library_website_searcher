@@ -1,0 +1,16 @@
+# Localization
+#
+# Replace the following placeholders with the correct values for
+# your installation.
+#
+# <NO_RESULTS_LINK>: The link for your site when there are no results
+
+en:
+  library_website_search:
+    display_name: "Library Website"
+    short_display_name: "Library Website"
+    search_form_placeholder: "Search Library Website"
+    module_callout: "Search Library Website"
+    error_service_message: "searching Library Website"
+    no_results_service_message: "a different search from Library Website"
+    no_results_link: "<NO_RESULTS_LINK>"
