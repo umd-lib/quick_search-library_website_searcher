@@ -3,7 +3,8 @@ require_relative 'boot'
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "quick_search/library_website_searcher"
+require 'quick_search'
+require 'quick_search/library_website_searcher'
 
 module Dummy
   class Application < Rails::Application
