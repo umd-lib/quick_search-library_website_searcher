@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module QuickSearch
   # QuickSearch seacher for UMD Library Website
   class LibraryWebsiteSearcher < QuickSearch::Searcher
