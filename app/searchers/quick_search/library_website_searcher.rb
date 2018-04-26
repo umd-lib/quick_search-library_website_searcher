@@ -3,34 +3,33 @@
 module QuickSearch
   # QuickSearch seacher for UMD Library Website
   class LibraryWebsiteSearcher < QuickSearch::Searcher
+    include QuickSearchLibraryWebsiteSearcher::Engine.routes.url_helpers
+
     def search
       resp = @http.get(search_url)
       @response = JSON.parse(resp.body)
+      @total = @response['totalCount']
     end
 
-    def results # rubocop:disable Metrics/MethodLength
-      if results_list
-        results_list
-      else
-        @results_list = []
-
-        search_result_list = @response['resultList']
-        search_result_list.each do |value|
-          result = OpenStruct.new
-          result.link = get_hyperlink(value)
-          result.title = get_title(value)
-          result.description = get_description(value)
-          @results_list << result
-        end
-
-        @results_list
+    def results
+      return results_list if results_list
+      @results_list = @response['resultList'].map do |value|
+        OpenStruct.new(link: get_hyperlink(value), title: get_title(value),
+                       description: get_description(value))
       end
+
+      @results_list
     end
 
     def search_url
       QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['search_url'] +
-        QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['query_params'] +
+        base_query_params +
         http_request_queries['not_escaped']
+    end
+
+    def base_query_params
+      return QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['query_params'] if @per_page.blank?
+      "?pageSize=#{@per_page}&pageNumber=#{@page}&q="
     end
 
     def total
@@ -38,7 +37,7 @@ module QuickSearch
     end
 
     def loaded_link
-      QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['loaded_link'] + http_request_queries['uri_escaped']
+      root_url(only_path: true, q: http_request_queries['uri_escaped'])
     end
 
     private

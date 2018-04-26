@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     quick_search-library_website_searcher (0.1.0)
+      kaminari
       quick_search-core (~> 0)
 
 GEM
@@ -101,7 +102,7 @@ GEM
       mysql2
       nokogiri
       rails (~> 5.0)
-    rack (2.0.4)
+    rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
