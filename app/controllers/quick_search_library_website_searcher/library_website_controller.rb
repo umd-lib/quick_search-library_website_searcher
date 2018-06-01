@@ -43,7 +43,7 @@ module QuickSearchLibraryWebsiteSearcher
         @query = @q
         @per_page = params[:per_page] || 10
         @page = params[:page] || 1
-        @offset = @page.to_i - 1 * @per_page
+        @offset = (@page.to_i - 1) * @per_page
       end
   end
 end
