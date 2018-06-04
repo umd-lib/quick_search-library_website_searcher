@@ -22,6 +22,11 @@ Include in your Search Results page
 <%= render_module(@library_website, 'library_website') %>
 ```
 
+# External Dependencies
+
+This searcher relies on a Solr server for generating search results. A typical
+use case is a Solr instance populated using Apache Nutch.
+
 ## Configuration
 
 The Library Website searcher requires configuration, such as specific URL to
