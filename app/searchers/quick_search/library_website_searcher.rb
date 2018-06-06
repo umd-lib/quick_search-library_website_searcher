@@ -5,8 +5,6 @@ require 'rsolr'
 module QuickSearch
   # QuickSearch seacher for UMD Library Website
   class LibraryWebsiteSearcher < QuickSearch::Searcher
-    include QuickSearchLibraryWebsiteSearcher::Engine.routes.url_helpers
-
     def search
       search_term = http_request_queries['uri_escaped']
       search_term = '*' if search_term.blank?
@@ -50,7 +48,8 @@ module QuickSearch
     end
 
     def loaded_link
-      root_url(only_path: true, q: http_request_queries['uri_escaped'])
+      QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['loaded_link'] +
+        http_request_queries['uri_escaped']
     end
 
     private
