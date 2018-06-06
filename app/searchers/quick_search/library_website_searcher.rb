@@ -67,7 +67,8 @@ module QuickSearch
 
       # Returns the string to use for the result description
       def get_description(result)
-        result['content']
+        description = result['documentContent']
+        content_tag(:div, content_tag(:p, description), class: ['block-with-text'])
       end
   end
 end
