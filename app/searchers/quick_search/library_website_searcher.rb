@@ -24,7 +24,8 @@ module QuickSearch
       return results_list if results_list
       @results_list = @response['response']['docs'].map do |doc|
         OpenStruct.new(
-          link: get_hyperlink(doc), title: get_title(doc), description: get_description(doc)
+          link: get_hyperlink(doc), title: get_title(doc), description: get_description(doc),
+          item_format: 'web_page'
         )
       end
 
