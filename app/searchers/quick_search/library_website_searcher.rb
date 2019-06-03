@@ -3,7 +3,7 @@
 require 'rsolr'
 
 module QuickSearch
-  # QuickSearch seacher for UMD Library Website
+  # QuickSearch searcher for UMD Library Website
   class LibraryWebsiteSearcher < QuickSearch::Searcher
     def search
       search_term = http_request_queries['uri_escaped']
@@ -50,7 +50,13 @@ module QuickSearch
 
     def loaded_link
       QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['loaded_link'] +
-        http_request_queries['uri_escaped']
+        percent_encoded_raw_user_search_query
+    end
+
+    # Returns the percent-encoded search query entered by the user, skipping
+    # the default QuickSearch query filtering
+    def percent_encoded_raw_user_search_query
+      CGI.escape(@q)
     end
 
     private
