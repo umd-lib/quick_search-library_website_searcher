@@ -22,6 +22,7 @@ module QuickSearch
 
     def results
       return results_list if results_list
+
       @results_list = @response['response']['docs'].map do |doc|
         OpenStruct.new(
           link: get_hyperlink(doc), title: get_title(doc), description: get_description(doc),
@@ -39,6 +40,7 @@ module QuickSearch
     def base_query_params
       query_params = QuickSearch::Engine::LIBRARY_WEBSITE_CONFIG['query_params']
       return default_query_params if @per_page.blank?
+
       query_params['rows'] = @per_page
       query_params['start'] = @offset
       query_params
